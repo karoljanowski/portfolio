@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+}
+
+:root {
+    --nav-height: 90px;
+}
+
+.container {
+    height: 100vh;
+    max-width: 1280px;
+    margin-inline: auto;
+}
+
+section {
+    height: calc(100vh - var(--nav-height));
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+
+}
+
+main {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: calc(100vh - var(--nav-height));
+}
+
+/* nav */
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: var(--nav-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+nav a:first-child {
+    color: black;
+    text-decoration: none;
+    flex-grow: 1;
+}
+
+nav h3 {
+    font-size: 1.5rem;
+}
+
+nav .icon {
+    padding: 10px;
+}
+
+nav a img {
+    width: 40px;
+    height: 40px;
+}
+
+nav a span {
+    display: none;
+}
+
+/* nav */
+/* section 1 */
+section {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.code-box {
+    background-color: #333;
+    width: 80%;
+    min-height: 150px;
+    border-radius: 5px;
+    color: white;
+    border: 1px solid #333;
+}
+
+.code-box .code {
+    padding: 15px;
+    font-size: 1rem;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.code::after {
+    content: '|';
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.row {
+    background: #f1f1f1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 10px;
+}
+
+.dot {
+    margin-top: 4px;
+    height: 12px;
+    width: 12px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot:nth-child(1) {
+    background: #ED594A;
+}
+
+.dot:nth-child(2) {
+    background: #FDD800;
+}
+
+.dot:nth-child(3) {
+    background: #5AC05A;
+}
+
+.img-me {
+    width: 80%;
+    border-radius: 15px;
+    background-color: #999;
+    display: grid;
+    place-content: center;
+}
+
+
+
+/* section 1 */
+/* section about */
+.about p {
+    padding: 5%;
+}
+
+/* section about */
+/* section skils */
+.skills div {
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.243);
+    width: 50%;
+    padding: 5%;
+    border-radius: 5px;
+}
+
+.skills img {
+    width: 60px;
+
+
+}
+
+/* section skils */
+/* section projekty */
+
+.menu-projects {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-projects span {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.menu-projects .span-active {
+    background-color: #999;
+}
+
+.project {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    display: none;
+}
+
+.project-active {
+    display: flex;
+}
+
+.project img {
+    width: 70%;
+    filter: grayscale(50%);
+    padding: 5px;
+    outline: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.project p {
+    font-size: 2rem;
+}
+
+.project .projects-buttons a img {
+    width: 48px;
+    height: 48px;
+}
+
+/* section projekty */
+/* media */
+@media screen and (min-width: 405px) {
+    .code-box {
+        min-height: 220px;
+    }
+
+    .code-box .code {
+        font-size: 1.5rem;
+
+    }
+
+    .about h2 {
+        font-size: 2rem;
+    }
+
+    .about p {
+        font-size: 1.5rem;
+    }
+
+    .skills h2 {
+        font-size: 2rem;
+    }
+
+    .skills div {
+        font-size: 1.5rem;
+    }
+
+    .projects h2 {
+        font-size: 2rem;
+    }
+
+    .menu-projects {
+        font-size: 1.5rem;
+    }
+
+
+}
+
+@media screen and (min-width: 768px) {
+    nav {
+        padding: 25px;
+    }
+
+    nav h3 {
+        font-size: 2rem;
+    }
+
+    nav a img {
+        width: 52px;
+        height: 52px;
+    }
+
+    .code-box .code {
+        font-size: 2rem;
+
+    }
+
+    .code-box {
+        min-height: 300px;
+    }
+
+    .dot {
+        height: 20px;
+        width: 20px;
+    }
+
+    .img-me img {
+        width: 500px;
+    }
+
+    .about h2 {
+        font-size: 3rem;
+    }
+
+    .about p {
+        font-size: 2rem;
+    }
+
+    .skills h2 {
+        font-size: 3rem;
+    }
+
+    .skills div {
+        font-size: 2rem;
+    }
+
+    .skills div img {
+        width: 100px;
+    }
+
+    .projects h2 {
+        font-size: 3rem;
+    }
+
+    .menu-projects {
+        font-size: 2rem;
+    }
+
+    .project img {
+        width: 90%;
+    }
+
+    .project p {
+        font-size: 3rem;
+    }
+
+    .project .projects-buttons a img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    .project img {
+        width: 100%;
+    }
+
+    .project p {
+        font-size: 4rem;
+    }
+
+    .project .projects-buttons a img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .code-box .code {
+        font-size: 3rem;
+
+    }
+
+    .about h2 {
+        font-size: 4rem;
+    }
+
+    .about p {
+        font-size: 3rem;
+    }
+
+    .skills h2 {
+        font-size: 4rem;
+    }
+
+    .skills div {
+        font-size: 3rem;
+    }
+
+    .projects h2 {
+        font-size: 4rem;
+    }
+
+    .menu-projects {
+        font-size: 2.5rem;
+    }
+}
