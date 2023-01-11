@@ -204,7 +204,7 @@ section {
 }
 
 .project img {
-    width: 70%;
+    width: 50%;
     filter: grayscale(50%);
     padding: 5px;
     outline: 1px solid black;
