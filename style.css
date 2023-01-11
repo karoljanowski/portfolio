@@ -25,7 +25,7 @@ section {
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
-
+    padding-top: 90px;
 }
 
 main {
