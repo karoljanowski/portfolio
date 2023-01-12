@@ -297,17 +297,19 @@ section {
 
     .project {
         flex-direction: row;
+        gap: 15px;
     }
 
     .project img {
         height: min(60vh, 500px);
     }
 
-    .p-button {
+    .p-buttons {
         display: flex;
         flex-direction: column;
+        gap: 15px;
     }
 
-    .projects {}
+
 
 }
