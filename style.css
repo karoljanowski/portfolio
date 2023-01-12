@@ -15,32 +15,31 @@ body {
 }
 
 .container {
-    height: 100vh;
     max-width: 1280px;
     margin-inline: auto;
 }
 
 section {
-    height: calc(100vh - var(--nav-height));
+    height: 100vh;
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
-    padding-top: 90px;
+    padding-top: 100px;
 }
 
 main {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
-    height: calc(100vh - var(--nav-height));
+    scroll-behavior: smooth;
+    height: 100vh;
 }
 
 /* nav */
 nav {
-    position: sticky;
+    width: min(100%, 1280px);
+    position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-
+    background-color: rgba(255, 255, 255, 0.9);
     height: var(--nav-height);
     display: flex;
     justify-content: space-between;
@@ -55,7 +54,7 @@ nav a:first-child {
 }
 
 nav h3 {
-    font-size: 1.5rem;
+    font-size: 24px;
 }
 
 nav .icon {
@@ -88,6 +87,8 @@ section {
 }
 
 .code-box .code {
+    max-width: 90%;
+    margin: 0 auto;
     padding: 15px;
     font-size: 1rem;
     text-align: center;
@@ -96,7 +97,7 @@ section {
 
 .code::after {
     content: '|';
-    animation: blink 0.5s infinite;
+    animation: blink 1s infinite;
 }
 
 @keyframes blink {
@@ -137,12 +138,17 @@ section {
     background: #5AC05A;
 }
 
+.img-me img {
+    width: 80%;
+}
+
 .img-me {
     width: 80%;
     border-radius: 15px;
     background-color: #999;
-    display: grid;
-    place-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 
@@ -156,17 +162,25 @@ section {
 /* section about */
 /* section skils */
 .skills div {
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.243);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.skills div div {
+    display: flex;
     width: 50%;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.243);
     padding: 5%;
     border-radius: 5px;
 }
 
 .skills img {
-    width: 60px;
-
-
+    width: 70px;
 }
 
 /* section skils */
@@ -201,6 +215,8 @@ section {
 
 .project-active {
     display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .project img {
@@ -223,109 +239,29 @@ section {
 
 /* section projekty */
 /* media */
-@media screen and (min-width: 405px) {
-    .code-box {
-        min-height: 220px;
-    }
-
-    .code-box .code {
-        font-size: 1.5rem;
-
-    }
-
-    .about h2 {
-        font-size: 2rem;
-    }
-
-    .about p {
-        font-size: 1.5rem;
-    }
-
-    .skills h2 {
-        font-size: 2rem;
-    }
-
-    .skills div {
-        font-size: 1.5rem;
-    }
-
-    .projects h2 {
-        font-size: 2rem;
-    }
-
-    .menu-projects {
-        font-size: 1.5rem;
-    }
-
-
-}
-
 @media screen and (min-width: 768px) {
-    nav {
-        padding: 25px;
-    }
-
-    nav h3 {
-        font-size: 2rem;
-    }
-
-    nav a img {
-        width: 52px;
-        height: 52px;
-    }
-
-    .code-box .code {
-        font-size: 2rem;
-
+    html {
+        font-size: 28px;
     }
 
     .code-box {
-        min-height: 300px;
-    }
-
-    .dot {
-        height: 20px;
-        width: 20px;
+        min-height: 250px;
     }
 
     .img-me img {
-        width: 500px;
+        width: 450px;
     }
 
-    .about h2 {
-        font-size: 3rem;
+    nav h3 {
+        font-size: 28px;
     }
 
-    .about p {
-        font-size: 2rem;
-    }
-
-    .skills h2 {
-        font-size: 3rem;
-    }
-
-    .skills div {
-        font-size: 2rem;
-    }
-
-    .skills div img {
-        width: 100px;
-    }
-
-    .projects h2 {
-        font-size: 3rem;
-    }
-
-    .menu-projects {
-        font-size: 2rem;
+    .skills img {
+        width: 80px;
     }
 
     .project img {
-        width: 90%;
-    }
-
-    .project p {
-        font-size: 3rem;
+        width: 70%;
     }
 
     .project .projects-buttons a img {
@@ -334,47 +270,44 @@ section {
     }
 }
 
-@media screen and (min-width: 900px) {
-
-    .project img {
-        width: 100%;
+@media (orientation: landscape) {
+    section.me {
+        max-width: 90%;
+        margin: 0 auto;
+        flex-direction: row;
+        gap: 30px;
     }
 
-    .project p {
-        font-size: 4rem;
+    .code-box {
+        height: min(60vh, 500px);
     }
 
-    .project .projects-buttons a img {
-        width: 72px;
-        height: 72px;
+    .img-me img {
+        height: 100%;
     }
 
-    .code-box .code {
-        font-size: 3rem;
-
-    }
-
-    .about h2 {
-        font-size: 4rem;
-    }
-
-    .about p {
-        font-size: 3rem;
-    }
-
-    .skills h2 {
-        font-size: 4rem;
+    .img-me {
+        /* width: 60%; */
+        height: min(60vh, 500px);
     }
 
     .skills div {
-        font-size: 3rem;
+        flex-direction: row;
     }
 
-    .projects h2 {
-        font-size: 4rem;
+    .project {
+        flex-direction: row;
     }
 
-    .menu-projects {
-        font-size: 2.5rem;
+    .project img {
+        height: min(60vh, 500px);
     }
+
+    .p-button {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .projects {}
+
 }

@@ -3,7 +3,7 @@ let i = 0
 function typeWriter() {
     let txt = "<h1> Karol Janowski </h1> console.log( 'Początkujący programista frontend' )"
 
-    let speed = 50;
+    let speed = 40;
     if (i < txt.length) {
         document.querySelector(".code").innerHTML += txt.charAt(i);
         i++;
