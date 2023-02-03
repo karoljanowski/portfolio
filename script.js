@@ -17,7 +17,7 @@ let spanMenu = Array.prototype.slice.call(document.querySelectorAll('.menu-proje
 let projectEl = Array.prototype.slice.call(document.querySelectorAll('.project'))
 
 spanMenu.forEach(e => e.addEventListener('click', function () {
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i <= 4; i++) {
         spanMenu[i].classList.remove('span-active')
         projectEl[i].classList.remove('project-active')
     }
