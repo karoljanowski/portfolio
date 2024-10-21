@@ -3,7 +3,12 @@ import { Addition, Base, Geometry, Subtraction } from "@react-three/csg";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from 'three';
 import { useMemo, useRef, useEffect } from 'react';
-import { Physics, RigidBody } from "@react-three/rapier";
+import { Physics, RigidBody, RapierRigidBody } from "@react-three/rapier";
+import { useTexture } from "@react-three/drei";
+
+const MAIN_BLUE = "#3B53FB";
+const MAIN_ORANGE = "#FF8319";
+const MAIN_DARK = "#3C3C3C";
 
 const Scene = () => {
     const mousePosition = useRef({ x: 0, y: 0 });
@@ -11,8 +16,8 @@ const Scene = () => {
     useEffect(() => {
         const updateMousePosition = (e: MouseEvent) => {
             mousePosition.current = {
-                x: (e.clientX / window.innerWidth) * 2 - 1,
-                y: -(e.clientY / window.innerHeight) * 2 + 1
+                x: (e.clientX / window.innerWidth),
+                y: (e.clientY / window.innerHeight)
             };
         };
 
@@ -24,11 +29,10 @@ const Scene = () => {
     }, []);
 
     return (
-        <Canvas style={{ height: '100vh', width: '50vw' }} camera={{ position: [-2, 0, 12] }}>
-            <directionalLight position={[-5, 5, 10]} intensity={2} color="white" />
-            <ambientLight intensity={0.3} />
-
-            <Physics gravity={[0, -40, 0]}>
+        <Canvas style={{ height: '100vh', width: '50vw' }} camera={{ position: [0, 0, 11] }}>
+            <Physics gravity={[0, -9, 0]} colliders={false}>
+                <directionalLight position={[0, 5, 10]} intensity={2} color="white" />
+                <ambientLight intensity={0.3} />
                 <BoxWithBalls mousePosition={mousePosition} />
             </Physics>
         </Canvas>
@@ -40,45 +44,97 @@ const BoxWithBalls = ({ mousePosition }: { mousePosition: React.RefObject<{ x: n
 
     useFrame(() => {
         if (groupRef.current && mousePosition.current) {
-            groupRef.current.rotation.x = -mousePosition.current.y * 0.1;
-            groupRef.current.rotation.y = mousePosition.current.x * 0.1;
+            groupRef.current.rotation.x = mousePosition.current.y * 0.2;
+            groupRef.current.rotation.y = mousePosition.current.x * 0.2;
         }
     });
 
     return (
-        <group ref={groupRef} scale={1}>
+        <group ref={groupRef}>
             <RigidBody type="fixed" colliders="trimesh">
                 <mesh>
-                    <Geometry useGroups>
-                        <Base position={[0, 0, 0]}>
-                            <Box />
-                        </Base>
-                    </Geometry>
+                    <Box />
                 </mesh>
             </RigidBody>
-            <Ball position={[3, 4, 1]} />
-            <Ball position={[3, 5, 1]} />
-            <Ball position={[3, 6, 1]} />
-            <Ball position={[3, 4, 1.5]} />
-            <Ball position={[3, 5, 1.5]} />
-            <Ball position={[3, 6, 1.5]} />
-
-            <RigidBody type="fixed" colliders="trimesh">
-                <mesh position={[0, 0, 2]}>
-                    <planeGeometry args={[60, 60]} />
-                    <meshBasicMaterial color="transparent" opacity={0.1} transparent />
-                </mesh>
-            </RigidBody>
+            <Balls />
+            <FontPlane />
+            <PlaneBetween />
+            <CylindricalCuts />
         </group>
     )
 }
 
-const Ball = ({ position }: { position: [number, number, number] }) => {
+const Balls = () => (
+    <>
+        {[...Array(5)].map((_, i) => (
+            <Ball key={i} position={[5, 8, 1]} imagePath="/js.png" />
+        ))}
+    </>
+)
+
+const FontPlane = () => (
+    <RigidBody type="fixed" colliders="trimesh">
+        <mesh position={[0, 0, 2]}>
+            <planeGeometry args={[60, 60]} />
+            <meshBasicMaterial color="transparent" opacity={0.1} transparent />
+        </mesh>
+    </RigidBody>
+)
+
+const PlaneBetween = () => (
+    <>
+        <RigidBody type="fixed" colliders="trimesh">
+            <mesh position={[-1, -3, 1]} rotation={[Math.PI / 2, -Math.PI / 4, 0]}>
+                <planeGeometry args={[2.8, 2]} />
+                <meshStandardMaterial color={MAIN_ORANGE} side={THREE.DoubleSide} />
+            </mesh>
+        </RigidBody>
+        <RigidBody type="fixed" colliders="trimesh">
+            <mesh position={[1, 1, 1]} rotation={[Math.PI / 2, Math.PI / 4, 0]}>
+                <planeGeometry args={[2.8, 2]} />
+                <meshStandardMaterial color={MAIN_ORANGE} side={THREE.DoubleSide} />
+            </mesh>
+        </RigidBody>
+    </>
+)
+
+const CylindricalCuts = () => (
+    <>
+        <CylindricalCut position={[0.5, 1, 1]} rotation={[0, 0, Math.PI / 2]} width={1} />
+        <CylindricalCut position={[-1, -3, 1]} rotation={[0, Math.PI / 2, 0]} width={2} />
+    </>
+)
+
+const CylindricalCut = ({ position, rotation, width }: { position: [number, number, number], rotation: [number, number, number], width: number }) => (
+    <mesh>
+        <Geometry useGroups>
+            <Base position={position}>
+                <boxGeometry args={[width, 2, 1.99]} />
+                <meshStandardMaterial color={MAIN_ORANGE} side={THREE.DoubleSide} />
+            </Base>
+            <Subtraction position={position} rotation={rotation}>
+                <cylinderGeometry args={[0.9, 0.9, width, 64]} />
+                <meshStandardMaterial color={MAIN_ORANGE} side={THREE.DoubleSide} />
+            </Subtraction>
+        </Geometry>
+    </mesh>
+)
+
+const Ball = ({ position, imagePath }: { position: [number, number, number], imagePath: string }) => {
+    const texture = useTexture(imagePath);
+    const rigidBodyRef = useRef<RapierRigidBody>(null);
+
+    const handleClick = () => {
+        if (rigidBodyRef.current) {
+            rigidBodyRef.current.applyImpulse({ x: 5, y: 5, z: 0 }, true);
+        }
+    };
+
     return (
-        <RigidBody colliders="ball" restitution={0.7}>
-            <mesh position={position}>
-                <sphereGeometry args={[0.4, 32, 32]} />
-                <meshStandardMaterial color="white" />
+        <RigidBody ref={rigidBodyRef} colliders="ball" restitution={0.5}>
+            <mesh position={position} onClick={handleClick}>
+                <sphereGeometry args={[0.5, 100, 100]} />
+                <meshStandardMaterial color={'white'} map={texture} side={THREE.DoubleSide} />
             </mesh>
         </RigidBody>
     )
@@ -93,21 +149,28 @@ const Box = () => {
                     <meshBasicMaterial color="#FDFDFD" side={THREE.DoubleSide} />
                 </Base>
                 <Subtraction position={[3, 4, 0]}>
-                    <SubstractionGeometryDoubleRounded color="#3B53FB" />
+                    <SubstractionGeometryDoubleRounded color={MAIN_BLUE} />
                 </Subtraction>
                 <Subtraction position={[-3, 0, 0]}>
-                    <SubstractionGeometryLeftRounded color="#FF8319" />
+                    <SubstractionGeometryLeftRounded color={MAIN_ORANGE} />
                 </Subtraction>
                 <Subtraction position={[3, -4, 0]}>
-                    <SubstractionGeometrySingleRounded color="#3C3C3C" />
+                    <SubstractionGeometrySingleRounded color={MAIN_DARK} />
                 </Subtraction>
-                <Subtraction position={[-1, 3, 0.95]}>
-                    <boxGeometry args={[2, 2, 1.9]} />
-                    <meshStandardMaterial color="#3B53FB" side={THREE.DoubleSide} />
+
+                <Subtraction position={[5, 11, 1]}>
+                    <cylinderGeometry args={[0.9, 0.9, 10, 64]} />
+                    <meshStandardMaterial color={MAIN_BLUE} side={THREE.DoubleSide} />
                 </Subtraction>
-                <Subtraction position={[-0.5, -2, 0.75]}>
-                    <boxGeometry args={[1, 3, 1.5]} />
-                    <meshStandardMaterial color="3C3C3C" side={THREE.DoubleSide} />
+
+                <Subtraction position={[-1, -3, 1]}>
+                    <boxGeometry args={[2, 2, 1.99]} />
+                    <meshStandardMaterial color={MAIN_ORANGE} side={THREE.DoubleSide} />
+                </Subtraction>
+
+                <Subtraction position={[1, 1, 1]}>
+                    <boxGeometry args={[2, 2, 1.99]} />
+                    <meshStandardMaterial color={MAIN_BLUE} side={THREE.DoubleSide} />
                 </Subtraction>
             </Geometry>
         </>
@@ -123,18 +186,15 @@ const SubstractionGeometryDoubleRounded = ({ color }: { color: string }) => {
             <Addition position={[-1, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
                 <ExtendedLShape color={color} />
             </Addition>
-            <Addition position={[0, 0, 1]}>
-                <boxGeometry args={[2, 4, 2]} />
+            <Addition position={[-1, -1, 1]}>
+                <boxGeometry args={[4, 2, 2]} />
                 <meshStandardMaterial color={color} />
             </Addition>
-            <Addition position={[2, 1, 1]}>
-                <boxGeometry args={[2, 2, 2]} />
+            <Addition position={[1, 1, 1]}>
+                <boxGeometry args={[4, 2, 2]} />
                 <meshStandardMaterial color={color} />
             </Addition>
-            <Addition position={[-2, -1, 1]}>
-                <boxGeometry args={[2, 2, 2]} />
-                <meshStandardMaterial color={color} />
-            </Addition>
+
         </Geometry>
     )
 }
