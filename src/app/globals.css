@@ -16,7 +16,10 @@
       height: 50%;
       z-index: 0;
       background: radial-gradient(circle, #00c8ec 0%, rgba(0, 0, 0, 0) 150%);
-      filter: blur(250px);
+      filter: blur(190px);
+      @media (min-width: 768px) {
+        filter: blur(500px);
+      }
     }
   }
   .glow-effect-middle {
@@ -31,7 +34,10 @@
       height: 50%;
       z-index: 0;
       background: radial-gradient(circle, rgb(129, 23, 190) 0%, rgba(0, 0, 0, 0) 150%);
-      filter: blur(500px);
+      filter: blur(100px);
+      @media (min-width: 768px) {
+        filter: blur(500px);
+      }
     }
   }
 }

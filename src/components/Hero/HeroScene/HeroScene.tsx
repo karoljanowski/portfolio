@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 
 const HeroScene = () => {
-  const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 10])
+  const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
 
   useEffect(() => {
     if(window.innerWidth > 768) {
@@ -16,7 +16,7 @@ const HeroScene = () => {
   }, [])
 
   return (
-    <div className='h-screen w-screen absolute top-0 left-0'>
+    <div className='h-[100svh] w-screen absolute top-0 left-0'>
       <Canvas camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox />

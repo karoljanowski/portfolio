@@ -9,7 +9,7 @@ const HeroScene = dynamic(() => import('./Hero/HeroScene/HeroScene'), {
 
 const HeroComponent = () => {
   return (
-    <div className={`relative h-screen w-screen glow-effect-right glow-effect-middle overflow-x-clip`}>
+    <div className={`relative h-[100svh] w-screen glow-effect-right glow-effect-middle overflow-x-clip`}>
       <Menu />
       <Socials />
       <Text />

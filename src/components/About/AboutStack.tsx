@@ -7,7 +7,7 @@ import * as THREE from 'three'
 const AboutStack = () => {
     return (
         <div className="relative grid place-items-center">
-            <div className="text-9xl font-bold text-center">STACK</div>
+            <div className="text-7xl font-bold text-center">STACK</div>
             <Scene />
         </div>
     )
@@ -37,7 +37,7 @@ const Scene = () => {
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[10, 10, 10]} intensity={1} />
                 <Physics gravity={[0, 0, 0]}>
-                    <Pointer />
+                    {/* <Pointer /> */}
                     <Sphere position={[0, 0, 0]} />
                     <Sphere position={[0, 0, 0]} />
                     <Sphere position={[0, 0, 0]} />
