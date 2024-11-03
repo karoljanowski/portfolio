@@ -16,6 +16,7 @@ const GlassBox = () => {
     return (
       <mesh ref={boxRef} rotation={[0, 0, 0]} position={[0, 0, 0]}>
         <boxGeometry args={[2, 2, 2]} />
+        {/* MeshTransmissionMaterial */}
         <meshPhysicalMaterial 
           transparent
           opacity={1}
