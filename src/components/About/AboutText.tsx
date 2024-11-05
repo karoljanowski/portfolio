@@ -1,9 +1,8 @@
 const AboutText = () => {
     return (
-        <div className="py-32 px-10 h-full relative">
-            <div className="border border-white border-opacity-5 rounded-xl bg-black bg-opacity-20 backdrop-blur p-10 h-full z-10">
-                <h1>About me</h1>
-            </div>
+        <div className="py-20 px-6 sm:px-12 h-full relative flex flex-col justify-center">
+            <div className="text-4xl font-bold mb-4">About me</div>
+            <div className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</div>
         </div>
     )
 }

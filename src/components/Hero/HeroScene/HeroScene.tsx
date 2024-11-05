@@ -10,7 +10,7 @@ const HeroScene = () => {
   const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
 
   useEffect(() => {
-    if(window.innerWidth > 768) {
+    if(window.innerWidth > 640) {
       setCameraPosition([0, 1.5, 5])
     }
   }, [])

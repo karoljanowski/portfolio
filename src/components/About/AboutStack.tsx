@@ -1,81 +1,60 @@
 'use client'
-import { Canvas, useFrame } from "@react-three/fiber"
-import { BallCollider, Physics, RapierRigidBody, RigidBody } from "@react-three/rapier"
-import { useRef } from "react"
-import * as THREE from 'three'
+import { OrbitControls, RoundedBox, shaderMaterial, useTexture } from "@react-three/drei"
+import { Canvas, extend } from "@react-three/fiber"
 
 const AboutStack = () => {
     return (
         <div className="relative grid place-items-center">
-            <div className="text-7xl font-bold text-center">STACK</div>
             <Scene />
         </div>
     )
 }
-const Pointer = ({ vec = new THREE.Vector3() }) => {
-    const ref = useRef<RapierRigidBody>(null)
-    
-    useFrame(({ mouse, viewport }) => {
-        vec.lerp({ 
-            x: (mouse.x * viewport.width) / 2, 
-            y: (mouse.y * viewport.height) / 2, 
-            z: 0 
-        }, 0.2)
-        ref.current?.setNextKinematicTranslation(vec)
-    })
-    
-    return (
-        <RigidBody position={[100, 100, 100]} type="kinematicPosition" colliders={false} ref={ref}>
-            <BallCollider args={[2]} />
-        </RigidBody>
-    )
-}
+
 const Scene = () => {
     return (
         <div className="absolute inset-0">
             <Canvas>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 10]} intensity={1} />
-                <Physics gravity={[0, 0, 0]}>
-                    {/* <Pointer /> */}
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[0, 0, 0]} />
-                    <Sphere position={[1, 0, 0]} />
-                    <Sphere position={[0, 1, 0]} />
-                    <Sphere position={[0, 0, 1]} />
-                </Physics>
+                <ambientLight intensity={1} />
+                <Layers />
+                <OrbitControls />
             </Canvas>
         </div>
     )
 }
 
-const Sphere = ({position}: {position: [number, number, number]}) => {
-    const rigidBody = useRef<RapierRigidBody>(null)
-    const vec = new THREE.Vector3()
-
-    useFrame((_, delta) => {
-        if (!rigidBody.current) return
-        delta = Math.min(0.05, delta)
-        rigidBody.current.applyImpulse(vec.copy(rigidBody.current.translation()).normalize().multiplyScalar(-10 * delta), true)
-    })
-
+const Layers = () => {
     return (
-        <RigidBody ref={rigidBody} colliders="ball" position={position} linearDamping={4} angularDamping={4}>
-            <mesh>
-                <sphereGeometry args={[0.5, 32, 32]} />
-                <meshStandardMaterial color="red" />
-            </mesh>
-        </RigidBody>
+        <>
+            <Layer position={[0, -1.2, 0]} opacity={1} texturePath="stack/html.png" />
+            <Layer position={[0, -0.8, 0]} opacity={1} texturePath="stack/css.png" />
+            <Layer position={[0, -0.4, 0]} opacity={1} texturePath="stack/js.png" />
+            <Layer position={[0, 0, 0]} opacity={1} texturePath="stack/ts.png" />
+            <Layer position={[0, 0.4, 0]} opacity={1} texturePath="stack/react.png" />
+            <Layer position={[0, 0.8, 0]} opacity={1} texturePath="stack/next.png" />
+            <Layer position={[0, 1.2, 0]} opacity={1} texturePath="stack/tailwind.png" />
+        </>
+    )   
+}
+
+const Layer = ({position, opacity, texturePath}: {position: [number, number, number], opacity: number, texturePath: string}) => {
+    const texture = useTexture(texturePath)
+    return (
+        <RoundedBox position={position} args={[2, 2, 0.08]} radius={0.05} rotation={[Math.PI / 2, 0, Math.PI]}>
+            <meshStandardMaterial 
+                map={texture} 
+                transparent
+                opacity={opacity}
+                onBeforeCompile={(shader) => {
+                    shader.fragmentShader = shader.fragmentShader.replace(
+                        '#include <map_fragment>',
+                        `
+                        #include <map_fragment>
+                        diffuseColor.rgb = vec3(dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114)));
+                        `
+                    );
+                }}
+            />
+        </RoundedBox>
     )
 }
 
