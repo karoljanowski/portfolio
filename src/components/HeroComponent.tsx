@@ -13,7 +13,7 @@ const HeroComponent = () => {
       <Menu />
       <Socials />
       <Text />
-      {/* <HeroScene /> */}
+      <HeroScene />
     </div>
   )
 }
