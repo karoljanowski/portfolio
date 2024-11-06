@@ -1,6 +1,9 @@
 import AboutText from "./About/AboutText"
-import AboutStack from "./About/AboutStack"
+import dynamic from 'next/dynamic'
 
+const AboutStack = dynamic(() => import('./About/AboutStack'), {
+  ssr: false,
+})
 
 const AboutComponent = () => {
   return (
