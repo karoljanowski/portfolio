@@ -7,7 +7,7 @@ import * as THREE from 'three'
 
 const AboutStack = () => {
     return (
-        <div className="relative grid place-items-center">
+        <div className="relative grid place-items-center w-full h-full">
                 <Scene />
             
         </div>
@@ -39,14 +39,14 @@ const Scene = () => {
                 <directionalLight position={[10, 10, 10]} intensity={1} />
                 <Physics gravity={[0, 0, 0]}>
                     <Pointer />
-                    <Sphere position={[0, 0, 0]} texturePath={'/jslogo.png'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/react.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/ts.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/next-js.png'} color="cyan" />
-                    <Sphere position={[0, 0, 0]} texturePath={'/jslogo.png'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/react.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/ts.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/next-js.png'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/css.png'} color="cyan" />
+                    <Sphere position={[0, 1, 0]} texturePath={'/stack/html.png'} color="cyan" />
+                    <Sphere position={[0, 0, 0]} texturePath={'/stack/js.png'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/next.png'} color="cyan" />
+                    <Sphere position={[0, 0, 0]} texturePath={'/stack/tailwind.png'} color="cyan" />
+                    <Sphere position={[0, 1, 0]} texturePath={'/stack/react.png'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/ts.png'} color="cyan" />
+
 
                 </Physics>
                 <OrbitControls />
@@ -70,7 +70,7 @@ const Sphere = ({position, texturePath, color}: {position: [number, number, numb
     return (
         <RigidBody ref={rigidBody} colliders="cuboid" position={position} linearDamping={2} angularDamping={2}>
             <mesh>
-                <sphereGeometry args={[0.6, 32, 32]} />
+                <sphereGeometry args={[0.7, 32, 32]} />
                 <meshPhysicalMaterial 
                     transparent
                     opacity={0.5}
