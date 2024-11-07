@@ -28,10 +28,10 @@
     &::after {
       content: '';
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 10%;
       width: 40%;
-      height: 40%;
+      height: 100%;
       z-index: 0;
       background: radial-gradient(circle, #8117be 0%, rgba(0, 0, 0, 0) 150%);
       filter: blur(100px);
