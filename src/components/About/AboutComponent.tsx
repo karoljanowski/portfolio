@@ -21,7 +21,8 @@ const AboutComponent = () => {
                 <AboutStack />
             </AboutBox>
 
-            <Button href="#projects" className="w-full flex justify-center text-3xl bg-cyan-950 border-cyan-950 text-cyan-500">Projects</Button>
+            <Button href="#projects" className="w-full flex justify-center text-3xl !bg-cyan-950 !border-cyan-950 !text-cyan-500">Projects</Button>
+            {/* delete important */}
 
             <AboutBox className="col-span-2">
                 <Experience />

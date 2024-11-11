@@ -4,6 +4,7 @@ interface ExperienceItem {
     dateStart: Date
     dateEnd: Date
     color: string
+    colorAccent: string
     showMonth: boolean
 }
 interface ExperienceItemProps {
@@ -13,8 +14,8 @@ interface ExperienceItemProps {
 const Experience = () => {
 
     const items: ExperienceItem[] = [
-        { title: "Frontend Developer", company: "Silnet Media", dateStart: new Date('2023-04-01'), dateEnd: new Date(), color: "cyan", showMonth: true },
-        { title: "Self education & \n Personal Projects", dateStart: new Date('2019-01-01'), dateEnd: new Date(), color: "purple", showMonth: false },
+        { title: "Frontend Developer", company: "Silnet Media", dateStart: new Date('2023-04-01'), dateEnd: new Date(), color: "bg-cyan-800", colorAccent: "bg-cyan-950", showMonth: true },
+        { title: "Self education & \n Personal Projects", dateStart: new Date('2019-01-01'), dateEnd: new Date(), color: "bg-purple-800", colorAccent: "bg-purple-950", showMonth: false },
     ]
 
     return (
@@ -38,7 +39,7 @@ const Timeline = ({ items }: { items: ExperienceItem[] }) => {
                 const timelineLeft = `${(item.dateStart.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
 
                 return <div key={index} className="relative h-3">
-                    <div style={{ width: timelineWidth, left: timelineLeft }} className={`bg-${item.color}-800 h-full rounded-sm absolute`}></div>
+                    <div style={{ width: timelineWidth, left: timelineLeft }} className={`${item.color} h-full rounded-sm absolute`}></div>
                 </div>
             })}
             <div className="relative w-full text-sm text-gray-500">
@@ -66,11 +67,11 @@ const ExperienceItems = ({ items }: { items: ExperienceItem[] }) => {
 }
 
 const ExperienceItem = ({ item }: ExperienceItemProps) => {
-    const { title, company, dateStart, dateEnd, color, showMonth } = item
+    const { title, company, dateStart, dateEnd, color, colorAccent } = item
     return (
         <div className="flex items-start gap-2">
-            <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-${color}-950 shadow-lg`}>
-                <div className={`h-8 w-8 rounded-md bg-${color}-800`} />
+            <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${colorAccent} shadow-lg`}>
+                <div className={`h-8 w-8 rounded-md ${color}`} />
             </div>
             <div className="flex flex-col">
                 <div className="text-md leading-tight font-bold">{title.split('\n').map(line => <div key={line}>{line}</div>)}</div>
