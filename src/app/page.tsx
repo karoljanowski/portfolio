@@ -1,7 +1,7 @@
-import HeroComponent from "@/components/HeroComponent";
-import AboutComponent from "@/components/AboutComponent";
-import ProjectsSection from "@/components/ProjectsSection";
-import ContactSection from "@/components/ContactSection";
+import HeroComponent from "@/components/Hero/HeroComponent";
+import AboutComponent from "@/components/About/AboutComponent";
+import ProjectsSection from "@/components/Projects/ProjectsSection";
+import ContactSection from "@/components/Contact/ContactSection";
 
 export default function Home() {
 
@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <HeroComponent />
       <AboutComponent />
-      <ProjectsSection />
+      {/* <ProjectsSection /> */}
       <ContactSection />
     </>
   );

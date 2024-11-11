@@ -16,7 +16,7 @@ const HeroScene = () => {
   }, [])
 
   return (
-    <div className='h-[100svh] w-screen absolute top-0 left-0'>
+    <div className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0'>
       <Canvas camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox />

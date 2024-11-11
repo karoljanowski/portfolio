@@ -10,7 +10,7 @@ const CylinderText = () => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
     
-        canvas.width = 2960;
+        canvas.width = 2400;
         canvas.height = 200;
     
         if (context) {
@@ -22,7 +22,7 @@ const CylinderText = () => {
             context.textAlign = 'center';
             context.textBaseline = 'middle';
             
-            const text = "FRONTEND DEVELOPMENT | CREATING WITH PASSION | ";
+            const text = "FRONTEND DEVELOPER | KAROL JANOWSKI | ";
             context.fillText(text, canvas.width / 2, canvas.height / 2);
         }
     

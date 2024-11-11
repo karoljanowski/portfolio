@@ -11,7 +11,7 @@ const SVGShape = ({url, rotation, position}: {url: string, rotation: [number, nu
     }, [svgData]);
   
     return (
-      <mesh scale={0.05} rotation={rotation} position={position}>
+      <mesh scale={0.00125} rotation={rotation} position={position}>
         {shapes.map((s, i) => (
           <extrudeGeometry
             key={i}

@@ -16,9 +16,12 @@ const AboutStack = () => {
     const groupControls = useAnimationControls()
 
     return (
-        <div className="relative grid place-items-center h-full">
+        <div className="relative h-full">
             <Scene groupControls={groupControls} />
-            <Buttons groupControls={groupControls} />
+            <div className="flex justify-between items-center p-4 lg:p-6">
+                <div className="text-xl text-red-800 uppercase font-semibold">Stack</div>
+                <Buttons groupControls={groupControls} />
+            </div>
         </div>
     )
 }
@@ -28,8 +31,8 @@ const Scene = ({groupControls}: {groupControls: AnimationControls}) => {
     const isInView = useInView(ref, { once: false, margin: '0px 0px -300px 0px' })
 
     return (
-        <div ref={ref} className="absolute inset-0 left-14 md:left-0">
-            <Canvas>
+        <div ref={ref} className="absolute inset-0">
+            <Canvas camera={{ position: [0, 0, 6] }}>
                 <ambientLight intensity={1} />
                 <Layers isInView={isInView} groupControls={groupControls} />
             </Canvas>
@@ -47,13 +50,13 @@ const Buttons = ({groupControls}: {groupControls: AnimationControls}) => {
     }
 
     return (
-        <div className="absolute top-0 bottom-0 left-0 flex items-center">
-            <div className="flex flex-col gap-6 bg-gray-800 bg-opacity-50 backdrop-blur rounded-xl border border-gray-700 text-white m-4 sm:m-8 px-2 py-4">
-                <button onClick={handleUp} className="grid place-items-center hover:bg-gray-700 px-1 py-2 rounded-md transition-all duration-300">
-                    <ArrowUp />
+        <div className="flex items-center">
+            <div className="flex gap-4 bg-red-800 bg-opacity-50 backdrop-blur rounded-xl border border-red-800 text-white p-2">
+                <button onClick={handleUp} className="grid place-items-center hover:bg-red-900 p-1 rounded-md transition-all duration-300">
+                    <ArrowUp className="w-4 h-4 text-red-300" />
                 </button>
-                <button onClick={handleDown} className="grid place-items-center hover:bg-gray-700 px-1 py-2 rounded-md transition-all duration-300">
-                    <ArrowDown />
+                <button onClick={handleDown} className="grid place-items-center hover:bg-red-900 p-1 rounded-md transition-all duration-300">
+                    <ArrowDown className="w-4 h-4 text-red-300" />
                 </button>
             </div>
         </div>

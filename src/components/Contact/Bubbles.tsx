@@ -7,9 +7,8 @@ import * as THREE from 'three'
 
 const AboutStack = () => {
     return (
-        <div className="relative grid place-items-center w-full h-full">
-                <Scene />
-            
+        <div className="relative grid place-items-center w-full h-screen">
+            <Scene />
         </div>
     )
 }
@@ -39,13 +38,13 @@ const Scene = () => {
                 <directionalLight position={[10, 10, 10]} intensity={1} />
                 <Physics gravity={[0, 0, 0]}>
                     <Pointer />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/css.png'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/stack/html.png'} color="cyan" />
-                    <Sphere position={[0, 0, 0]} texturePath={'/stack/js.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/next.png'} color="cyan" />
-                    <Sphere position={[0, 0, 0]} texturePath={'/stack/tailwind.png'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/stack/react.png'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/ts.png'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/css.svg'} color="cyan" />
+                    <Sphere position={[0, 1, 0]} texturePath={'/stack/html.svg'} color="cyan" />
+                    <Sphere position={[0, 0, 0]} texturePath={'/stack/js.svg'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/next.svg'} color="cyan" />
+                    <Sphere position={[0, 0, 0]} texturePath={'/stack/tailwind.svg'} color="cyan" />
+                    <Sphere position={[0, 1, 0]} texturePath={'/stack/react.svg'} color="cyan" />
+                    <Sphere position={[0, 0, 1]} texturePath={'/stack/ts.svg'} color="cyan" />
 
 
                 </Physics>
@@ -58,7 +57,7 @@ const Scene = () => {
 const Sphere = ({position, texturePath, color}: {position: [number, number, number], texturePath: string, color: string}) => {
     const rigidBody = useRef<RapierRigidBody>(null)
     const vec = new THREE.Vector3()
-    const texture = useTexture(texturePath)
+    // const texture = useTexture(texturePath)
 
 
     useFrame((_, delta) => {
@@ -83,10 +82,7 @@ const Sphere = ({position, texturePath, color}: {position: [number, number, numb
                     transmission={1}
                 />
             </mesh>
-            <mesh>
-                <boxGeometry args={[0.7, 0.7, 0.7]} />
-                <meshStandardMaterial map={texture} />
-            </mesh>
+
         </RigidBody>
     )
 }
