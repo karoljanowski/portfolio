@@ -12,7 +12,7 @@ const HeroComponent = () => {
   return (
     <div className='relative h-[100svh] w-screen glow-effect-right glow-effect-middle overflow-x-clip'>
       <Header />
-      {/* <HeroScene /> */}
+      <HeroScene />
       <Scroll />
     </div>
   )

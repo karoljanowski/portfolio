@@ -75,7 +75,7 @@ const ExperienceItem = ({ item }: ExperienceItemProps) => {
             <div className="flex flex-col">
                 <div className="text-md leading-tight font-bold">{title.split('\n').map(line => <div key={line}>{line}</div>)}</div>
                 <div className="text-sm leading-tight text-gray-500">{company}</div>
-                <div className="text-sm leading-tight text-gray-500">{dateStart.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} - {dateEnd === 'Present' ? 'Present' : dateEnd.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
+                <div className="text-sm leading-tight text-gray-500">{dateStart.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })} - {dateEnd === new Date() ? 'Present' : dateEnd.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</div>
             </div>
         </div>
     )
