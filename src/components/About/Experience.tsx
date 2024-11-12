@@ -15,12 +15,12 @@ const Experience = () => {
 
     const items: ExperienceItem[] = [
         { title: "Frontend Developer", company: "Silnet Media", dateStart: new Date('2023-04-01'), dateEnd: new Date(), color: "bg-cyan-800", colorAccent: "bg-cyan-950", showMonth: true },
-        { title: "Self education & \n Personal Projects", dateStart: new Date('2019-01-01'), dateEnd: new Date(), color: "bg-purple-800", colorAccent: "bg-purple-950", showMonth: false },
+        { title: "Self education & \n Personal Projects", dateStart: new Date('2020-01-01'), dateEnd: new Date(), color: "bg-purple-800", colorAccent: "bg-purple-950", showMonth: false },
     ]
 
     return (
         <div>
-            <div className="text-xl mb-4 font-semibold text-cyan-500 uppercase">Experience</div>
+            <div className="text-xl mb-4 font-semibold text-indigo-500 uppercase">Experience</div>
             <ExperienceItems items={items} />
             <Timeline items={items} />
         </div>
@@ -33,7 +33,7 @@ const Timeline = ({ items }: { items: ExperienceItem[] }) => {
     const dates = items.map(item => item.dateStart).sort((a, b) => a.getTime() - b.getTime()).filter(date => date !== totalStartDate && date !== totalEndDate)
     
     return (
-        <div className="flex flex-col py-6 mr-4">
+        <div className="flex flex-col mt-6 mx-3">
             {items.map((item, index) => {
                 const timelineWidth = `${(item.dateEnd.getTime() - item.dateStart.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
                 const timelineLeft = `${(item.dateStart.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
@@ -58,7 +58,7 @@ const Timeline = ({ items }: { items: ExperienceItem[] }) => {
 
 const ExperienceItems = ({ items }: { items: ExperienceItem[] }) => {
     return (
-        <div className="grid grid-cols-2 gap-4 py-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:my-10">
             {items.map((item, index) => (
                 <ExperienceItem key={index} item={item} />
             ))}

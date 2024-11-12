@@ -16,10 +16,10 @@ const AboutStack = () => {
     const groupControls = useAnimationControls()
 
     return (
-        <div className="relative h-full">
+        <div className="relative h-full min-h-[300px]">
             <Scene groupControls={groupControls} />
             <div className="flex justify-between items-center p-4 lg:p-6">
-                <div className="text-xl text-red-800 uppercase font-semibold">Stack</div>
+                <div className="text-xl text-cyan-800 uppercase font-semibold">Stack</div>
                 <Buttons groupControls={groupControls} />
             </div>
         </div>
@@ -51,12 +51,12 @@ const Buttons = ({groupControls}: {groupControls: AnimationControls}) => {
 
     return (
         <div className="flex items-center">
-            <div className="flex gap-4 bg-red-800 bg-opacity-50 backdrop-blur rounded-xl border border-red-800 text-white p-2">
-                <button onClick={handleUp} className="grid place-items-center hover:bg-red-900 p-1 rounded-md transition-all duration-300">
-                    <ArrowUp className="w-4 h-4 text-red-300" />
+            <div className="flex gap-3 bg-cyan-800 bg-opacity-50 backdrop-blur rounded-xl border border-cyan-800 text-white p-2">
+                <button onClick={handleUp} className="grid place-items-center hover:bg-cyan-900 p-1 rounded-md transition-all duration-300">
+                    <ArrowUp className="w-4 h-4 text-cyan-300" />
                 </button>
-                <button onClick={handleDown} className="grid place-items-center hover:bg-red-900 p-1 rounded-md transition-all duration-300">
-                    <ArrowDown className="w-4 h-4 text-red-300" />
+                <button onClick={handleDown} className="grid place-items-center hover:bg-cyan-900 p-1 rounded-md transition-all duration-300">
+                    <ArrowDown className="w-4 h-4 text-cyan-300" />
                 </button>
             </div>
         </div>
