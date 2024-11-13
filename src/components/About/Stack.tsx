@@ -101,7 +101,7 @@ const Layers = ({isInView, groupControls}: {isInView: boolean, groupControls: An
             groupControls.start('initial')
             layerControls.start('initial')
         }
-        if (isInView) {
+        if (isInView && groupControls) {
             startAnimation()
         }else{
             setYPosition(0)
