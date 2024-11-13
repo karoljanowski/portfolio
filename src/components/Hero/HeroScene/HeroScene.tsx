@@ -5,14 +5,21 @@ import CylinderText from './CylinderText'
 import SVGShape from './SvgShape'
 import { useEffect, useState } from 'react'
 
+interface Props {
+  onLoad: () => void;
+}
 
-const HeroScene = () => {
+const HeroScene = ({ onLoad }: Props) => {
   const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
 
   useEffect(() => {
     if(window.innerWidth > 640) {
       setCameraPosition([0, 1.5, 5])
     }
+  }, [])
+
+  useEffect(() => {
+    onLoad()
   }, [])
 
   return (

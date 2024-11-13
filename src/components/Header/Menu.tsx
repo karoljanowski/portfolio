@@ -31,9 +31,9 @@ const Menu = () => {
                     className={`lg:hidden fixed inset-0 h-screen bg-gray-800 bg-opacity-30 backdrop-blur`}
                 >
                     <div className="container mx-auto flex flex-col items-end justify-center h-full gap-4 px-4">
-                        <Link className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#about">About</Link>
-                        <Link className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#projects">Projects</Link>
-                        <Link className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#contact">Contact</Link>
+                        <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#about">About</Link>
+                        <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#projects">Projects</Link>
+                        <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#contact">Contact</Link>
                     </div>
                     </motion.div>
                 )}

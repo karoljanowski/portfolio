@@ -7,7 +7,7 @@ import * as THREE from 'three'
 
 const ProjectsSection = () => {
     return (
-        <div className="py-20 px-4 container mx-auto h-[100svh] relative">
+        <div id="projects" className="py-20 px-4 container mx-auto h-[100svh] relative">
             <Scene />
         </div>
     )
