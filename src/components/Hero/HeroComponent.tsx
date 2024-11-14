@@ -20,7 +20,7 @@ const HeroComponent = () => {
         {!loaded && <Loading key="loading" />}
       </AnimatePresence>
       <Header loaded={loaded} />
-      {/* <HeroScene onLoad={() => setLoaded(true)} /> */}
+      <HeroScene onLoad={() => setLoaded(true)} />
       <Scroll />
     </div>
   )

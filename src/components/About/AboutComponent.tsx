@@ -39,7 +39,7 @@ const AboutComponent = () => {
                 <AboutStack />
             </AboutBox>
 
-            <AboutBox className="bg-purple-950 border-purple-950 bg-opacity-30 p-0 lg:p-0">
+            <AboutBox className="bg-purple-950 border-purple-950 bg-opacity-30 p-0 lg:p-0 overflow-hidden">
                 <Button href="projects" className="h-full flex justify-center text-3xl text-purple-500 bg-transparent border-transparent" rotate>Projects</Button>
             </AboutBox>
 
