@@ -4,7 +4,7 @@ import GlassBox from './GlassBox'
 import CylinderText from './CylinderText'
 import SVGShape from './SvgShape'
 import { useEffect, useState, useRef } from 'react'
-import { useInView } from 'framer-motion'
+import { useInView, motion } from 'framer-motion'
 
 interface Props {
   onLoad: () => void;
@@ -26,8 +26,8 @@ const HeroScene = ({ onLoad }: Props) => {
   }, [])
 
   return (
-    <div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0'>
-      <Canvas performance={{ max: 0.1, current: 0.1 }} dpr={[1, 2]} camera={{ position: cameraPosition }}>
+    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={{ opacity: 0 }} animate={{ opacity: isInView ? 1 : 0 }} transition={{ duration: 0.5 }}>
+      <Canvas camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox isInView={isInView} />
         <CylinderText isInView={isInView} />
@@ -37,7 +37,7 @@ const HeroScene = ({ onLoad }: Props) => {
           position={[-0.6, 0.5, 0]} 
         />
       </Canvas>
-    </div>
+    </motion.div>
   )
 }
 

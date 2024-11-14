@@ -18,7 +18,7 @@ const Menu = () => {
 
             <div className="hidden lg:flex items-center justify-center gap-10 py-2 px-4 sm:px-8 bg-gray-800 bg-opacity-50 backdrop-blur rounded-lg border border-gray-700 mx-auto">
                 <Link className="text-gray-300 hover:bg-gray-700 py-1 sm:px-4 px-2 rounded-md transition-all duration-300" href="#about">About</Link>
-                <Link className="text-gray-300 hover:bg-gray-700 py-1 sm:px-4 px-2 rounded-md transition-all duration-300" href="#projects">Projects</Link>
+                <Link className="text-gray-300 hover:bg-gray-700 py-1 sm:px-4 px-2 rounded-md transition-all duration-300" href="projects">Projects</Link>
                 <Link className="text-gray-300 hover:bg-gray-700 py-1 sm:px-4 px-2 rounded-md transition-all duration-300" href="#contact">Contact</Link>
             </div>
 
@@ -32,7 +32,7 @@ const Menu = () => {
                 >
                     <div className="container mx-auto flex flex-col items-end justify-center h-full gap-4 px-4">
                         <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#about">About</Link>
-                        <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#projects">Projects</Link>
+                        <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="projects">Projects</Link>
                         <Link onClick={() => setIsOpen(false)} className="text-gray-300 text-lg py-1 px-4 rounded-md transition-all duration-300" href="#contact">Contact</Link>
                     </div>
                     </motion.div>

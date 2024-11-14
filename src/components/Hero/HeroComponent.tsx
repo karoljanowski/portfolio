@@ -12,15 +12,15 @@ const HeroScene = dynamic(() => import('./HeroScene/HeroScene'), {
 });
 
 const HeroComponent = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [loaded, setLoaded] = useState(true);
 
   return (
     <div className='relative h-[100svh] w-screen glow-effect-right glow-effect-middle overflow-x-clip'>
       <AnimatePresence mode="wait">
-        {isLoading && <Loading key="loading" />}
+        {!loaded && <Loading key="loading" />}
       </AnimatePresence>
-      <Header />
-      <HeroScene onLoad={() => setIsLoading(false)} />
+      <Header loaded={loaded} />
+      {/* <HeroScene onLoad={() => setLoaded(true)} /> */}
       <Scroll />
     </div>
   )
