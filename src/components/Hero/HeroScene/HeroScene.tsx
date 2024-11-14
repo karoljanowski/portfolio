@@ -26,7 +26,7 @@ const HeroScene = ({ onLoad }: Props) => {
   }, [])
 
   return (
-    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={{ opacity: 0 }} animate={{ opacity: isInView ? 1 : 0 }} transition={{ duration: 0.5 }}>
+    <div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0'>
       <Canvas camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox isInView={isInView} />
@@ -37,7 +37,7 @@ const HeroScene = ({ onLoad }: Props) => {
           position={[-0.6, 0.5, 0]} 
         />
       </Canvas>
-    </motion.div>
+    </div>
   )
 }
 
