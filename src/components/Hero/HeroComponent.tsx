@@ -12,7 +12,7 @@ const HeroScene = dynamic(() => import('./HeroScene/HeroScene'), {
 });
 
 const HeroComponent = () => {
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className='relative h-[100svh] w-screen glow-effect-right glow-effect-middle overflow-x-clip'>
