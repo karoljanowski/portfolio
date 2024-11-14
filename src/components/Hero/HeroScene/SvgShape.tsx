@@ -20,7 +20,7 @@ const SVGShape = ({url, rotation, position}: {url: string, rotation: [number, nu
               {
                 depth: 5,
                 bevelEnabled: false,
-                steps: 30
+                steps: 1
               }
             ]}
           />
