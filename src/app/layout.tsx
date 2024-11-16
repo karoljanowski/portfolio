@@ -7,6 +7,9 @@ const manrope = Manrope({ subsets: ["latin"], weight: ["400", "600", "800"] });
 export const metadata: Metadata = {
   title: "Karol Janowski | Portfolio",
   description: "Check out my portfolio, projects and contact me!",
+  icons: {
+    icon: '/cursor.svg',
+  },
 };
 
 export default function RootLayout({

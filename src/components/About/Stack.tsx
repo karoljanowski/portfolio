@@ -101,21 +101,21 @@ const Layers = ({isInView, groupControls}: {isInView: boolean, groupControls: An
             groupControls.start('initial')
             layerControls.start('initial')
         }
-        if(groupRef.current && groupControls){
+
+        if(groupRef.current && groupControls.mount()){
             if (isInView) {
                 startAnimation()
             }else{
+                groupControls.set({ y: 0 })
                 setYPosition(0)
                 startInitial()
-                groupControls.set({ y: 0 })
             }
         }
+        
 
     }, [isInView])
 
     const handleAnimationStart = (definition: string) => {
-        console.log('definition', definition)
-        console.log('YPosition', YPosition)
         if (definition === 'up') {
             setYPosition(YPosition + positionStep)
         } else if (definition === 'down') {

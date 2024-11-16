@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ExperienceItem {
     id: number
@@ -40,13 +40,32 @@ const Timeline = ({ items, hoveredItem, setHoveredItem }: {
     const totalStartDate = items.map(item => item.dateStart).sort((a, b) => a.getTime() - b.getTime())[0]
     const totalEndDate = items.map(item => item.dateEnd).sort((a, b) => b.getTime() - a.getTime())[0]
     const dates = items.map(item => item.dateStart).sort((a, b) => a.getTime() - b.getTime()).filter(date => date !== totalStartDate && date !== totalEndDate)
-    
+
+    const [timelineItems, setTimelineItems] = useState<{ id: number, color: string, timelineWidth: string, timelineLeft: string }[]>([])
+    const [datesItems, setDatesItems] = useState<{text: string, left: string}[]>([])
+
+    useEffect(() => {
+        const timelineItems = items.map((item, index) => {
+            const id = item.id
+            const color = item.color
+            const timelineWidth = `${(item.dateEnd.getTime() - item.dateStart.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
+            const timelineLeft = `${(item.dateStart.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
+            return { id, color, timelineWidth, timelineLeft }
+        })
+
+        const datesItems = dates.map(item => {
+            const left = `${(item.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
+            const text = item.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+            return { text, left }
+        })
+
+        setTimelineItems(timelineItems)
+        setDatesItems(datesItems)
+    }, [hoveredItem])
+
     return (
         <div className="flex flex-col mt-6 mx-3">
-            {items.map((item, index) => {
-                const timelineWidth = `${(item.dateEnd.getTime() - item.dateStart.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
-                const timelineLeft = `${(item.dateStart.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%`
-
+            {timelineItems.map((item, index) => {
                 return <div 
                     key={index} 
                     className="relative h-3"
@@ -54,17 +73,19 @@ const Timeline = ({ items, hoveredItem, setHoveredItem }: {
                     onMouseLeave={() => setHoveredItem(null)}
                 >
                     <div 
-                        style={{ width: timelineWidth, left: timelineLeft }} 
+                        style={{ 
+                            width: item.timelineWidth,
+                            left: item.timelineLeft
+                        }} 
                         className={`${item.color} h-full rounded-sm absolute transition-opacity ${hoveredItem !== null && hoveredItem !== item.id ? 'opacity-30' : 'opacity-100'}`}
                     ></div>
                 </div>
             })}
             <div className="relative w-full text-sm text-gray-500">
                 {totalStartDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                {dates.map(date => {
-                    const text = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-                    return <span key={text} className="absolute -translate-x-1/2" style={{ left: `${(date.getTime() - totalStartDate.getTime()) / (totalEndDate.getTime() - totalStartDate.getTime()) * 100}%` }}>
-                        {text}
+                {datesItems.map((item, index) => {
+                    return <span key={index} className="absolute -translate-x-1/2" style={{ left: item.left }}>
+                        {item.text}
                     </span>
                 })}
                 <span className="absolute right-0">Now</span>

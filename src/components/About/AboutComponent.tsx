@@ -27,7 +27,7 @@ const AboutComponent = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, margin: "0px -100px" }}
             id="about" 
             className="min-h-[100svh] grid grid-cols-[2fr_1fr] lg:grid-cols-4 container mx-auto py-20 px-4 gap-2 lg:gap-3"
         >

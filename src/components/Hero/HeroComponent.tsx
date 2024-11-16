@@ -15,12 +15,12 @@ const HeroComponent = () => {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className='relative h-[100svh] w-screen glow-effect-right glow-effect-middle overflow-x-clip'>
+    <div className='relative h-[100svh] w-screen glow-effect-right-cyan glow-effect-middle-purple overflow-x-clip'>
       <AnimatePresence mode="wait">
         {!loaded && <Loading key="loading" />}
       </AnimatePresence>
       <Header loaded={loaded} />
-      <HeroScene onLoad={() => setLoaded(true)} />
+      <HeroScene onLoad={() => setLoaded(true)} loaded={loaded} />
       <Scroll />
     </div>
   )

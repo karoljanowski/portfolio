@@ -8,9 +8,10 @@ import { useInView, motion } from 'framer-motion'
 
 interface Props {
   onLoad: () => void;
+  loaded: boolean;
 }
 
-const HeroScene = ({ onLoad }: Props) => {
+const HeroScene = ({ onLoad, loaded }: Props) => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
   const isInView = useInView(sceneRef);
@@ -21,13 +22,9 @@ const HeroScene = ({ onLoad }: Props) => {
     }
   }, [])
 
-  useEffect(() => {
-    onLoad()
-  }, [])
-
   return (
-    <div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0'>
-      <Canvas camera={{ position: cameraPosition }}>
+    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={{ opacity: 0 }} animate={{ opacity: loaded ? 1 : 0 }} transition={{ duration: 0.5, delay: 0.75 }}>
+      <Canvas onCreated={() => onLoad()} camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox isInView={isInView} />
         <CylinderText isInView={isInView} />
@@ -37,7 +34,7 @@ const HeroScene = ({ onLoad }: Props) => {
           position={[-0.6, 0.5, 0]} 
         />
       </Canvas>
-    </div>
+    </motion.div>
   )
 }
 
