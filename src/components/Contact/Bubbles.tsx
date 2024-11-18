@@ -1,93 +1,68 @@
 'use client'
 import { Canvas, useFrame } from "@react-three/fiber"
-import { BallCollider, Physics, RapierRigidBody, RigidBody } from "@react-three/rapier"
-import { OrbitControls, RoundedBox, Text, useTexture } from "@react-three/drei"
+import { Physics, RapierRigidBody, RigidBody } from "@react-three/rapier"
 import { useRef } from "react"
 import * as THREE from 'three'
 
-const AboutStack = () => {
-    return (
-        <div className="relative grid place-items-center w-full h-full">
-            <Scene />
-        </div>
-    )
-}
-const Pointer = ({ vec = new THREE.Vector3() }) => {
-    const ref = useRef<RapierRigidBody>(null)
-    
-    useFrame(({ mouse, viewport }) => {
-        vec.lerp({ 
-            x: (mouse.x * viewport.width) / 2, 
-            y: (mouse.y * viewport.height) / 2, 
-            z: 0 
-        }, 0.2)
-        ref.current?.setNextKinematicTranslation(vec)
-    })
-    
-    return (
-        <RigidBody position={[100, 100, 100]} type="kinematicPosition" colliders={false} ref={ref}>
-            <BallCollider args={[0.5]} />
-        </RigidBody>
-    )
-}
 const Scene = () => {
     return (
         <div className="absolute inset-0">
             <Canvas>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[10, 10, 10]} intensity={1} />
-                <hemisphereLight />
-                <Text>Contact me</Text>
+                <directionalLight position={[0, 0, 10]} intensity={1} />
                 <Physics gravity={[0, 0, 0]}>
-                    <Pointer />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/css.svg'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/stack/html.svg'} color="cyan" />
-                    <Sphere position={[0, 0, 0]} texturePath={'/stack/js.svg'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/next.svg'} color="cyan" />
-                    <Sphere position={[0, 0, 0]} texturePath={'/stack/tailwind.svg'} color="cyan" />
-                    <Sphere position={[0, 1, 0]} texturePath={'/stack/react.svg'} color="cyan" />
-                    <Sphere position={[0, 0, 1]} texturePath={'/stack/ts.svg'} color="cyan" />
-
-
+                    <RigidBody type="fixed" position={[0, 0, 0]} colliders="cuboid">
+                        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 2, 0]}>
+                            <planeGeometry args={[50, 50]} />
+                            <meshStandardMaterial color="cyan" transparent opacity={0} />
+                        </mesh>
+                    </RigidBody>
+                    <RigidBody type="fixed" position={[0, 0, 0]} colliders="cuboid">
+                        <mesh rotation={[0, 0, 0]} position={[0, 0, 8]}>
+                            <planeGeometry args={[50, 50]} />
+                            <meshStandardMaterial color="cyan" transparent opacity={1} />
+                        </mesh>
+                    </RigidBody>
+                    {Array.from({ length: 30 }).map((_, index) => (
+                        <Sphere position={[Math.random() * -10, Math.random() * -10, Math.random() * -10]} color="cyan" />
+                    ))}
                 </Physics>
-                <OrbitControls />
             </Canvas>
         </div>
     )
 }
 
-const Sphere = ({position, texturePath, color}: {position: [number, number, number], texturePath: string, color: string}) => {
+const Sphere = ({position, color}: {position: [number, number, number], color: string}) => {
     const rigidBody = useRef<RapierRigidBody>(null)
     const vec = new THREE.Vector3()
-    const texture = useTexture(texturePath)
-
+    const lastImpulse = useRef(0)
 
     useFrame((_, delta) => {
         if (!rigidBody.current) return
         delta = Math.min(0.05, delta)
-        rigidBody.current.applyImpulse(vec.copy(rigidBody.current.translation()).normalize().multiplyScalar(-30 * delta), true)
+        
+        rigidBody.current.applyImpulse(vec.copy(rigidBody.current.translation()).normalize().multiplyScalar(-5 * delta), true)
+        
+        lastImpulse.current += delta
+        if (lastImpulse.current > 2) {
+            lastImpulse.current = 0
+            const randomImpulse = new THREE.Vector3(
+                (Math.random() - 0.5) * 20,
+                (Math.random() - 0.5) * 20,
+                (Math.random() - 0.5) * 20
+            )
+            rigidBody.current.applyImpulse(randomImpulse, true)
+        }
     })
 
     return (
-        <RigidBody ref={rigidBody} colliders="cuboid" position={position} linearDamping={2} angularDamping={2}>
+        <RigidBody ref={rigidBody} colliders="ball" position={position} linearDamping={2} angularDamping={2}>
             <mesh>
                 <sphereGeometry args={[0.7, 32, 32]} />
-                <meshPhysicalMaterial 
-                    transparent
-                    opacity={1}
-                    color={'white'}
-                    transmission={1.6}
-                    ior={1.5}
-                    thickness={2}
-                    roughness={0}
-                    metalness={0}
-                    clearcoat={1}
-                    clearcoatRoughness={0}
-                />
+                <meshStandardMaterial color={color} />
             </mesh>
 
         </RigidBody>
     )
 }
 
-export default AboutStack
+export default Scene

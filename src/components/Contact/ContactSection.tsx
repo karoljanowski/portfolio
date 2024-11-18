@@ -1,17 +1,16 @@
 import ContactForm from "./ContactForm"
 import dynamic from "next/dynamic"
 
-const Plane = dynamic(() => import('./Plane'), { ssr: false })
+const Bubbles = dynamic(() => import('./Bubbles'), { ssr: false })
 
 const ContactSection = () => {
     return (
-        <div className="relative container mx-auto py-20 px-4 glow-effect-cyan-left">
-            <h2 className="text-4xl font-bold mb-10">Lets&apos;s work together</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-1">
+        <div className="h-screen px-4 relative container mx-auto flex justify-center items-center glow-effect-cyan-left">
+            <div className="max-w-[800px] w-full relative z-10">
                 <ContactForm />
-                <div className="h-full w-full relative row-start-1 col-start-1 md:col-start-2">
-                    <Plane /> 
-                </div>
+            </div>
+            <div className="h-full w-full absolute top-0 left-0">
+                <Bubbles /> 
             </div>
         </div>
     )
