@@ -23,7 +23,7 @@ const Scene = () => {
                         </mesh>
                     </RigidBody>
                     {Array.from({ length: 30 }).map((_, index) => (
-                        <Sphere position={[Math.random() * -10, Math.random() * -10, Math.random() * -10]} color="cyan" />
+                        <Sphere key={index} position={[Math.random() * -10, Math.random() * -10, Math.random() * -10]} color="cyan" />
                     ))}
                 </Physics>
             </Canvas>
