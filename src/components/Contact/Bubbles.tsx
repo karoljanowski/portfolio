@@ -5,6 +5,7 @@ import { useRef } from "react"
 import * as THREE from 'three'
 
 const Scene = () => {
+    
     return (
         <div className="absolute inset-0">
             <Canvas>
@@ -22,7 +23,7 @@ const Scene = () => {
                             <meshStandardMaterial color="cyan" transparent opacity={1} />
                         </mesh>
                     </RigidBody>
-                    {Array.from({ length: 30 }).map((_, index) => (
+                    {Array.from({ length: 10 }).map((_, index) => (
                         <Sphere key={index} position={[Math.random() * -10, Math.random() * -10, Math.random() * -10]} color="cyan" />
                     ))}
                 </Physics>
@@ -40,24 +41,24 @@ const Sphere = ({position, color}: {position: [number, number, number], color: s
         if (!rigidBody.current) return
         delta = Math.min(0.05, delta)
         
-        rigidBody.current.applyImpulse(vec.copy(rigidBody.current.translation()).normalize().multiplyScalar(-5 * delta), true)
+        rigidBody.current.applyImpulse(vec.copy(rigidBody.current.translation()).normalize().multiplyScalar(-50 * delta), true)
         
         lastImpulse.current += delta
-        if (lastImpulse.current > 2) {
+        if (lastImpulse.current > 3) {
             lastImpulse.current = 0
             const randomImpulse = new THREE.Vector3(
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20
+                (Math.random() - 0.5) * 100,
+                (Math.random() - 0.5) * 100,
+                (Math.random() - 0.5) * 100
             )
-            rigidBody.current.applyImpulse(randomImpulse, true)
+            rigidBody.current.applyImpulse(randomImpulse.multiplyScalar(2), true)
         }
     })
 
     return (
         <RigidBody ref={rigidBody} colliders="ball" position={position} linearDamping={2} angularDamping={2}>
             <mesh>
-                <sphereGeometry args={[0.7, 32, 32]} />
+                <sphereGeometry args={[1.2, 32, 32]} />
                 <meshStandardMaterial color={color} />
             </mesh>
 
