@@ -9,10 +9,6 @@ import { motion, stagger, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import AboutStack from './Stack'
 
-// const AboutStack = dynamic(() => import('./Stack'), {
-//     ssr: false,
-// })
-
 const AboutComponent = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { once: false, margin: "-150px" });
@@ -24,7 +20,7 @@ const AboutComponent = () => {
             transition: {
                 staggerChildren: 0.1
             }
-        }
+        },
     };
     
     return (
@@ -45,7 +41,7 @@ const AboutComponent = () => {
             </AboutBox>
 
             <AboutBox className="bg-purple-950 border-purple-950 bg-opacity-30 p-0 lg:p-0 overflow-hidden">
-                <Button href="projects" className="h-full flex justify-center text-3xl text-purple-500 bg-transparent border-transparent" rotate>Projects</Button>
+                <Button href="/projects" className="h-full flex justify-center text-3xl text-purple-500 bg-transparent border-transparent" rotate>Projects</Button>
             </AboutBox>
 
             <AboutBox className="col-span-2 bg-indigo-950 border-indigo-950">

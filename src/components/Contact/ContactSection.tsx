@@ -1,8 +1,5 @@
 import ContactForm from "./ContactForm"
-import dynamic from "next/dynamic"
 import Bubbles from "./Bubbles"
-
-// const Bubbles = dynamic(() => import('./Bubbles'), { ssr: false })
 
 const ContactSection = () => {
     return (

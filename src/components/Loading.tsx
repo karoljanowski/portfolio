@@ -8,7 +8,7 @@ const Loading = () => {
         <motion.div 
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.3 }}
         className='h-[100svh] w-screen fixed top-0 left-0 bg-black z-50 glow-effect-right-cyan glow-effect-middle-purple overflow-hidden'>
             <TextCircle />
             <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>

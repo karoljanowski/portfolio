@@ -5,13 +5,9 @@ import CylinderText from './CylinderText'
 import SVGShape from './SvgShape'
 import { useEffect, useState, useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
+// import { useAnimation } from '../../PageTransition/AnimationContext'
 
-interface Props {
-  onLoad: () => void;
-  loaded: boolean;
-}
-
-const HeroScene = ({ onLoad, loaded }: Props) => {
+const HeroScene = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
   const isInView = useInView(sceneRef);
@@ -22,9 +18,14 @@ const HeroScene = ({ onLoad, loaded }: Props) => {
     }
   }, [])
 
+  const variants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 }
+  }
+
   return (
-    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={{ opacity: 0 }} animate={{ opacity: loaded ? 1 : 0 }} transition={{ duration: 0.5, delay: 0.75 }}>
-      <Canvas onCreated={() => onLoad()} camera={{ position: cameraPosition }}>
+    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={'initial'} variants={variants} animate="animate" transition={{ duration: 0.5 }}>
+      <Canvas camera={{ position: cameraPosition }}>
         <ambientLight intensity={1} />
         <GlassBox isInView={isInView} />
         <CylinderText isInView={isInView} />
