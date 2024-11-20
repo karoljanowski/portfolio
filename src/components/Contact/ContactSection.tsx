@@ -1,11 +1,9 @@
 import ContactForm from "./ContactForm"
-import dynamic from "next/dynamic"
-
-const Bubbles = dynamic(() => import('./Bubbles'), { ssr: false })
+import Bubbles from "./Bubbles"
 
 const ContactSection = () => {
     return (
-        <div className="h-screen px-4 relative container mx-auto flex justify-center items-center glow-effect-cyan-left">
+        <div id="contact" className="h-screen px-4 relative flex justify-center items-center glow-effect-cyan-left">
             <div className="max-w-[800px] w-full relative z-10">
                 <ContactForm />
             </div>
