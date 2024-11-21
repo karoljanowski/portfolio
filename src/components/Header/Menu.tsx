@@ -13,6 +13,8 @@ const Menu = () => {
 
     const handleRedirect = (path: string) => {
         setIsOpen(false)
+
+        if(pathname === path) return
         const isHashPath = path.includes('#')
         const isHomePage = pathname === '/' || pathname === ''
         
