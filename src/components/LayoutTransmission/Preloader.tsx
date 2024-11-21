@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Loading from "../Loading"
 import { AnimatePresence } from "framer-motion"
 import Provider from "./Provider"
+import Header from "../Header/Header"
 
 
 const Preloader = ({ children }: { children: React.ReactNode }) => {
@@ -19,7 +20,10 @@ const Preloader = ({ children }: { children: React.ReactNode }) => {
                 {initialLoad ? (
                     <Loading key="loading" />
                 ) : (
-                    <Provider>{children}</Provider>
+                    <Provider>
+                        <Header />
+                        {children}
+                    </Provider>
                 )}
             </AnimatePresence>
         </>
