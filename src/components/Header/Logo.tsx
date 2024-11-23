@@ -1,10 +1,15 @@
 import { useTransitionRouter } from "next-transition-router"
-
+import { usePathname } from "next/navigation"
 const Logo = ({ loadingScreen }: { loadingScreen?: boolean }) => {
+    const pathname = usePathname()
     const router = useTransitionRouter()
     const handleRedirect = () => {
         if (loadingScreen) return
-        router.push('/')
+        if (pathname === '/'){
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+            router.push('/')
+        }
     }
     return (
         <div onClick={handleRedirect} className={`w-8 h-8 bg-cyan-800 bg-opacity-50 backdrop-blur rounded-md relative ${loadingScreen ? 'scale-[3]' : 'cursor-pointer'}`}>
