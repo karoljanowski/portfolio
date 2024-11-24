@@ -1,10 +1,12 @@
 'use client'
 
-import { GradientTexture, MeshReflectorMaterial, OrbitControls, Text3D, Image, useTexture, Text, RoundedBox, Center } from "@react-three/drei";
+import { MeshReflectorMaterial, Text3D, useTexture, RoundedBox, Center, FontData } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { DoubleSide, MathUtils, Vector3 } from "three";
+import { DoubleSide, MathUtils } from "three";
 import Button from "../Button";
 import { useState, useRef, MutableRefObject, useEffect } from "react";
+import {Manrope} from '../../fonts/Manrope'
+
 const Projects = [
     {
         image: '/projects/pizza.png',
@@ -54,11 +56,13 @@ const Buttons = ({currentProject}: {currentProject: MutableRefObject<number>}) =
 
 const Scene = ({currentProject}: {currentProject: MutableRefObject<number>}) => {
     const [cameraPositionZ, setCameraPositionZ] = useState<number>(5)
+
     useEffect(() => {
         if(window.innerWidth > 640) {
           setCameraPositionZ(4)
         }
-      }, [])
+    }, [])
+
     return (
         <Canvas camera={{position: [0, 3.5, cameraPositionZ]}}>
             <ambientLight intensity={1} />
@@ -117,7 +121,7 @@ const Project = ({image, title, position, mainColor}: {image: string, title: str
                 <meshStandardMaterial map={texture} transparent opacity={0.8} />
             </mesh>
             <Center position={[0, 0, 1.5]} rotation={[-Math.PI / 2, 0, 0]}>
-                <Text3D size={0.5} lineHeight={0.5} height={0.1} font={'/Manrope_SemiBold.json'}>
+                <Text3D size={0.5} lineHeight={0.5} height={0.1} font={(Manrope as unknown) as FontData}>
                     {title}
                     <meshStandardMaterial color={mainColor} />
                 </Text3D>
