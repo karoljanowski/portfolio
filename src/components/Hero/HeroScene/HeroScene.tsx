@@ -5,7 +5,6 @@ import CylinderText from './CylinderText'
 import SVGShape from './SvgShape'
 import { useEffect, useState, useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
-// import { useAnimation } from '../../PageTransition/AnimationContext'
 
 const HeroScene = () => {
   const sceneRef = useRef<HTMLDivElement>(null);

@@ -1,5 +1,4 @@
 'use client'
-import Header from '../Header/Header'
 import Scroll from '../Hero/Scroll'
 import HeroScene from './HeroScene/HeroScene'
 
