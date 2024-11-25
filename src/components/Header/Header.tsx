@@ -1,5 +1,5 @@
 'use client'
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import Socials from "./Socials";
 import Logo from "./Logo";
 import { motion } from "framer-motion";

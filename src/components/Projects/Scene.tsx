@@ -5,6 +5,8 @@ import { MeshReflectorMaterial } from "@react-three/drei";
 import { Projects } from "@/data/projects";
 import { Project } from "./Project";
 
+const projectsSpace = 7.5
+
 export const Scene = ({currentProject}: {currentProject: MutableRefObject<number>}) => {
     const [cameraPositionZ, setCameraPositionZ] = useState<number>(5)
 
@@ -34,7 +36,7 @@ export const Scene = ({currentProject}: {currentProject: MutableRefObject<number
                     color="#050505" />
             </mesh>
             {Projects.map((project, index) => (
-                <Project key={index} {...project} position={[index * 10, 0, 0]} />
+                <Project key={index} {...project} position={[index * projectsSpace, 0, 0]} />
             ))}
             <CameraController currentProject={currentProject} />
         </Canvas>
@@ -44,7 +46,7 @@ export const Scene = ({currentProject}: {currentProject: MutableRefObject<number
 const CameraController = ({currentProject}: {currentProject: MutableRefObject<number>}) => {
     const targetX = useRef(0)
     useFrame(({ camera }, delta) => {
-        targetX.current = currentProject.current * 10
+        targetX.current = currentProject.current * projectsSpace
         
         camera.position.x = MathUtils.lerp(
             camera.position.x,

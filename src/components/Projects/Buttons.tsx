@@ -1,7 +1,5 @@
 import { MutableRefObject } from "react";
 import { Projects } from "@/data/projects";
-import { ArrowRight } from "lucide-react";
-import { ArrowLeft } from "lucide-react";
 import { StandardButton } from "../Button";
 
 export const Buttons = ({currentProject}: {currentProject: MutableRefObject<number>}) => {
