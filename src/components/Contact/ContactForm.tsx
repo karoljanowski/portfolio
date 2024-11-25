@@ -2,7 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom"
 import { handleFormSubmit } from "@/utils/actions"
-import Button from "../Button"
+import { FormButton } from "../Button"
 import { Toaster, toast } from "react-hot-toast"
 import { useEffect } from "react"
 
@@ -40,7 +40,7 @@ const ContactForm = () => {
                     {state.errors?.find(error => error.key === 'message') && <p className="text-red-500 text-sm">{state.errors?.find(error => error.key === 'message')?.message}</p>}
                 </div>
 
-                <Button type="submit" className="bg-cyan-800 border-cyan-800 bg-opacity-80 mt-4">Send message</Button>
+                <FormButton icon="arrow-up-right" type="submit" className="bg-cyan-800 border-cyan-800 bg-opacity-80 mt-4">Send message</FormButton>
             </form>
         </div>
         </>

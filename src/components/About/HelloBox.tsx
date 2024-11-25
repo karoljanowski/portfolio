@@ -1,4 +1,4 @@
-import Button from "../Button";
+import {ButtonLink} from "../Button";
 
 const HelloBox = () => {
     return (
@@ -6,7 +6,7 @@ const HelloBox = () => {
             <div className="text-xl text-blue-500 uppercase font-semibold">Hello there!</div>
             <div className="text-2xl font-extrabold">I&apos;m Karol Janowski</div>
             <div className="text-md font-normal leading-tight">Frontend Developer with a passion for modern and creative solutions</div>
-            <Button href="#contact" className="mt-2">Contact me!</Button>
+            <ButtonLink icon="arrow-up-right" href="#contact" className="mt-2">Contact me!</ButtonLink>
         </div>
     )
 }

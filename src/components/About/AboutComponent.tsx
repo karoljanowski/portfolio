@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import HelloBox from './HelloBox'
 import Aboutme from './Aboutme'
 import Experience from './Experience'
-import Button from '../Button'
+import { ButtonLink } from '../Button'
 import { twMerge } from 'tailwind-merge'
 import { motion, stagger, useInView } from 'framer-motion'
 import { useRef } from 'react'
@@ -41,7 +41,7 @@ const AboutComponent = () => {
             </AboutBox>
 
             <AboutBox className="bg-purple-950 border-purple-950 bg-opacity-30 p-0 lg:p-0 overflow-hidden">
-                <Button href="/projects" className="h-full flex justify-center text-3xl text-purple-500 bg-transparent border-transparent" rotate>Projects</Button>
+                <ButtonLink icon="arrow-up-right" href="/projects" className="h-full flex justify-center text-3xl text-purple-500 bg-transparent border-transparent" rotate>Projects</ButtonLink>
             </AboutBox>
 
             <AboutBox className="col-span-2 bg-indigo-950 border-indigo-950">
