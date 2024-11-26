@@ -1,13 +1,13 @@
 
 import { AnimatePresence, motion } from "framer-motion";
-import useNavigation from "./useNavigation";
+import useNavigation from "../../../hooks/useNavigation";
 
 interface MobileMenuProps {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
 }
 
-const MobileMenu = ({ isOpen }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, setIsOpen }: MobileMenuProps) => {
     const menuVariants = {
         hidden: { opacity: 0, backdropFilter: 'blur(0px)' },
         visible: { opacity: 1, backdropFilter: 'blur(8px)' },
@@ -21,12 +21,13 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
                 animate="visible"
                 exit="hidden"
                 variants={menuVariants}
+                onClick={() => setIsOpen(false)}
                 className="lg:hidden fixed inset-0 h-screen bg-black bg-opacity-60"
             >
                 <div className="container mx-auto flex flex-col items-end justify-center h-full gap-6 px-4">
-                    <MenuItem path="/#about" index={0}>About</MenuItem>
-                    <MenuItem path="/projects" index={1}>Projects</MenuItem>
-                    <MenuItem path="/#contact" index={2}>Contact</MenuItem>
+                    <MenuItem path="/#about" setIsOpen={setIsOpen} index={0}>About</MenuItem>
+                    <MenuItem path="/projects" setIsOpen={setIsOpen} index={1}>Projects</MenuItem>
+                    <MenuItem path="/#contact" setIsOpen={setIsOpen} index={2}>Contact</MenuItem>
                 </div>
             </motion.div>
             )}
@@ -34,7 +35,7 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
     );
   };
 
-  const MenuItem = ({ path, children, index }: { path: string, children: React.ReactNode, index: number }) => {
+  const MenuItem = ({ path, children, index, setIsOpen }: { path: string, children: React.ReactNode, index: number, setIsOpen: (isOpen: boolean) => void }) => {
     const { handleRedirect } = useNavigation();
 
     const itemVariants = {
@@ -48,7 +49,11 @@ const MobileMenu = ({ isOpen }: MobileMenuProps) => {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            onClick={() => handleRedirect(path)} 
+            onClick={(e) => {
+                e.stopPropagation();
+                handleRedirect(path);
+                setIsOpen(false);
+            }} 
             className="text-gray-300 text-2xl py-1 px-4 rounded-md uppercase font-semibold"
         >
             {children}

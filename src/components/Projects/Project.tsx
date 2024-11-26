@@ -1,18 +1,21 @@
-import { RoundedBox, Text3D, useTexture, Center, FontData } from "@react-three/drei";
+'use client'
+import { RoundedBox, Text3D, useTexture, Center, FontData, Html } from "@react-three/drei";
 import { Manrope } from '../../fonts/Manrope';
+import useNavigation from "@/hooks/useNavigation";
 
 interface ProjectProps {
     image: string;
     title: string;
     position: [number, number, number];
     mainColor: string;
+    handleRedirect: (path: string) => void
 }
 
-export const Project = ({image, title, position, mainColor}: ProjectProps) => {
+export const Project = ({image, title, position, mainColor, handleRedirect}: ProjectProps) => {
     const texture = useTexture(image)
 
     return (
-        <group position={position}>
+        <group position={position} onClick={() => handleRedirect('/projects/project')}>
             <pointLight position={[0, 2, -2]} intensity={1000} color={mainColor} />
             <RoundedBox args={[4, 2.5, 0.5]} position={[0, 1.25, 0]} radius={0.1}>
                 <meshStandardMaterial color={mainColor}  />
