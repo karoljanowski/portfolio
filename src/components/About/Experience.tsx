@@ -61,7 +61,7 @@ const Timeline = ({ items, hoveredItem, setHoveredItem }: {
 
         setTimelineItems(timelineItems)
         setDatesItems(datesItems)
-    }, [hoveredItem])
+    }, [hoveredItem, items, totalStartDate, totalEndDate, dates])
 
     return (
         <div className="flex flex-col mt-6 mx-3">
