@@ -9,13 +9,14 @@ interface ProjectProps {
     position: [number, number, number];
     mainColor: string;
     handleRedirect: (path: string) => void
+    path: string
 }
 
-export const Project = ({image, title, position, mainColor, handleRedirect}: ProjectProps) => {
+export const Project = ({image, title, position, mainColor, handleRedirect, path}: ProjectProps) => {
     const texture = useTexture(image)
 
     return (
-        <group position={position} onClick={() => handleRedirect('/projects/project')}>
+        <group position={position} onClick={() => handleRedirect(`/projects/${path}`)}>
             <pointLight position={[0, 2, -2]} intensity={1000} color={mainColor} />
             <RoundedBox args={[4, 2.5, 0.5]} position={[0, 1.25, 0]} radius={0.1}>
                 <meshStandardMaterial color={mainColor}  />

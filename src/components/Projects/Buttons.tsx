@@ -1,13 +1,13 @@
-import { MutableRefObject } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { Projects } from "@/data/projects";
 import { StandardButton } from "../Button";
 import { InfoIcon } from "lucide-react";
 
-export const Buttons = ({currentProject}: {currentProject: MutableRefObject<number>}) => {
+export const Buttons = ({currentProject, setCurrentProject}: {currentProject: number, setCurrentProject: (value: number) => void}) => {
     const handleClick = (direction: 'previous' | 'next') => {
-        if (direction === 'previous' && currentProject.current === 0) return
-        if (direction === 'next' && currentProject.current === Projects.length - 1) return
-        currentProject.current = direction === 'previous' ? currentProject.current - 1 : currentProject.current + 1
+        if (direction === 'previous' && currentProject === 0) return
+        if (direction === 'next' && currentProject === Projects.length - 1) return
+        setCurrentProject(direction === 'previous' ? currentProject - 1 : currentProject + 1)
     }
     return (
         <div className="absolute bottom-0 left-0 z-10 w-full">
@@ -18,9 +18,9 @@ export const Buttons = ({currentProject}: {currentProject: MutableRefObject<numb
                 </div>
             </div>
             <div className="flex justify-center items-center gap-4 pb-10">
-                <StandardButton className="flex-1 max-w-40" icon="arrow-left" onClick={() => handleClick('previous')}>Previous</StandardButton>
-                <StandardButton className="flex-1 max-w-40" icon="arrow-right" onClick={() => handleClick('next')}>Next</StandardButton>
+                <StandardButton disabled={currentProject === 0} className="flex-1 max-w-40 disabled:opacity-50" icon="arrow-left" onClick={() => handleClick('previous')}>Previous</StandardButton>
+                <StandardButton disabled={currentProject === Projects.length - 1} className="flex-1 max-w-40 disabled:opacity-50" icon="arrow-right" onClick={() => handleClick('next')}>Next</StandardButton>
             </div>
         </div>
     )
-} 
+}

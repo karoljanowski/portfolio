@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import Preloader from "@/components/LayoutTransmission/Preloader";
 import Providers from "../components/LayoutTransmission/Provider";
 

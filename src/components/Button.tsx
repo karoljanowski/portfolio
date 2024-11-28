@@ -86,16 +86,17 @@ type StandardButtonProps = {
   className?: string
   onClick?: () => void
   icon?: IconProps
+  disabled?: boolean
 }
 
-export const StandardButton = ({ children, className, onClick, icon }: StandardButtonProps) => {
+export const StandardButton = ({ children, className, onClick, icon, disabled }: StandardButtonProps) => {
   const buttonClasses = twMerge(
     `bg-neutral-100 bg-opacity-15 backdrop-blur rounded-md border border-neutral-700 uppercase text-gray-300 px-6 py-2 overflow-hidden group`,
     className
   )
 
   return (
-    <button className={buttonClasses} onClick={onClick}>
+    <button className={buttonClasses} onClick={onClick} disabled={disabled}>
       <ContentWrapper icon={icon}>{children}</ContentWrapper>
     </button>
   )
