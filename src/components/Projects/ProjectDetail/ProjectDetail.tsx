@@ -53,6 +53,7 @@ const ProjectDetail = ({ project }: { project: Project }) => {
                         <ProjectLinks 
                             live={project.live} 
                             github={project.github} 
+                            dashboard={project.dashboard}
                             mainColor={project.mainColor} 
                         />
                     </DetailBox>

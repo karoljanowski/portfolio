@@ -111,9 +111,7 @@ const Layers = ({isInView, groupControls}: {isInView: boolean, groupControls: An
                 startInitial()
             }
         }
-        
-
-    }, [isInView, groupControls, layerControls])
+    }, [isInView])
 
     const handleAnimationStart = (definition: string) => {
         if (definition === 'up') {
