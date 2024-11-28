@@ -1,11 +1,12 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { MutableRefObject, useState, useEffect, useRef, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import { DoubleSide, MathUtils } from "three";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { Projects } from "@/data/projects";
 import { Project } from "./Project";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useNavigation from "@/hooks/useNavigation";
+import { motion } from "framer-motion";
 
 const projectsSpace = 7.5
 
@@ -13,7 +14,7 @@ export const Scene = ({currentProject}: {currentProject: number}) => {
     const isMobile = useMediaQuery('(max-width: 640px)')
     const initialCameraPositionZ = 5.5
     const {handleRedirect} = useNavigation()
-
+    const [isCanvasLoaded, setIsCanvasLoaded] = useState(false);
     const floorPlane = useMemo(() => (
         <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[100, 100]} />
@@ -57,7 +58,11 @@ export const Scene = ({currentProject}: {currentProject: number}) => {
     ), [])
 
     return (
-        <Canvas camera={{position: [0, 3.5, initialCameraPositionZ]}}>
+        <motion.div className='h-full' animate={isCanvasLoaded ? {opacity: 1} : {opacity: 0}} transition={{ duration: 0.5 }}>
+            <Canvas 
+                camera={{position: [0, 3.5, initialCameraPositionZ]}} 
+            onCreated={() => setIsCanvasLoaded(true)}
+        >
             {lights}
             {floorPlane}
             {backgroundPlane}
@@ -65,9 +70,10 @@ export const Scene = ({currentProject}: {currentProject: number}) => {
             <CameraController 
                 currentProject={currentProject} 
                 initialCameraPositionZ={initialCameraPositionZ} 
-                isMobile={isMobile} 
-            />
-        </Canvas>
+                isMobile={isMobile}     
+                />
+            </Canvas>
+        </motion.div>
     )
 } 
 

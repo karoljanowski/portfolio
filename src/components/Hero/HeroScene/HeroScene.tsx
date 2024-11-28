@@ -10,6 +10,7 @@ const HeroScene = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const [cameraPosition, setCameraPosition] = useState<Vector3>([0, 3, 8])
   const isInView = useInView(sceneRef);
+  const [isCanvasLoaded, setIsCanvasLoaded] = useState(false);
 
   useEffect(() => {
     if(window.innerWidth > 640) {
@@ -23,8 +24,8 @@ const HeroScene = () => {
   }
 
   return (
-    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={'initial'} variants={variants} animate="animate" transition={{ duration: 0.5 }}>
-      <Canvas camera={{ position: cameraPosition }}>
+    <motion.div ref={sceneRef} className='h-[calc(100svh-40px)] w-screen absolute top-10 left-0' initial={'initial'} variants={variants} animate={isCanvasLoaded ? 'animate' : 'initial'} transition={{ duration: 0.5 }}>
+      <Canvas camera={{ position: cameraPosition }} onCreated={() => setIsCanvasLoaded(true)}>
         <ambientLight intensity={1} />
         <GlassBox isInView={isInView} />
         <CylinderText isInView={isInView} />
