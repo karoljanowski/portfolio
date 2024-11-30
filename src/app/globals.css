@@ -5,6 +5,11 @@
   scroll-behavior: smooth;
 }
 
+:root {
+  --swiper-pagination-color: rgb(0, 0, 0);
+  --swiper-pagination-bullet-inactive-color: rgb(0, 0, 0);
+}
+
 @layer utilities {
   .glow-effect-right-cyan {
     background: black;

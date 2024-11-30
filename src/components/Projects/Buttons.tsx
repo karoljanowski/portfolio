@@ -10,7 +10,7 @@ export const Buttons = ({currentProject, setCurrentProject}: {currentProject: nu
         setCurrentProject(direction === 'previous' ? currentProject - 1 : currentProject + 1)
     }
     return (
-        <div className="absolute bottom-0 left-0 z-10 w-full">
+        <div className="absolute bottom-0 left-0 w-full">
             <div className="flex justify-center items-center gap-4 p-3 text-gray-400">
                 <InfoIcon className="w-4 h-4" />
                 <div className="text-sm">
