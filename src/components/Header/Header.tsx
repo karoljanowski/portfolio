@@ -12,7 +12,7 @@ const Header = () => {
     }
 
     return (
-        <motion.div className='fixed top-0 z-10 left-0 w-full' initial={'initial'} variants={variants} animate="animate" transition={{ duration: 0.5 }}>
+        <motion.div className='fixed top-0 z-20 left-0 w-full' initial={'initial'} variants={variants} animate="animate" transition={{ duration: 0.5 }}>
             <div className='px-4 py-4 md:py-8 grid grid-cols-[1fr_auto_auto] lg:grid-cols-[1fr_2fr_1fr] items-center container mx-auto gap-2'>
                 <Logo />
                 <Menu />
